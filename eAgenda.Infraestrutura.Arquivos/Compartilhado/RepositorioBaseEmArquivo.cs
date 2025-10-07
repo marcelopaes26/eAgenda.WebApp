@@ -1,30 +1,63 @@
-using eAgenda.Dominio.ModuloCategoria;
-using eAgenda.Dominio.ModuloCompromisso;
-using eAgenda.Dominio.ModuloContato;
-using eAgenda.Dominio.ModuloDespesa;
-using eAgenda.Dominio.ModuloTarefa;
-using eAgenda.Infraestrutura.Arquivos.Compartilhado;
-using eAgenda.Infraestrutura.Arquivos.ModuloCategoria;
-using eAgenda.Infraestrutura.Arquivos.ModuloCompromisso;
-using eAgenda.Infraestrutura.Arquivos.ModuloContato;
-using eAgenda.Infraestrutura.Arquivos.ModuloDespesa;
-using eAgenda.Infraestrutura.Arquivos.ModuloTarefa;
-using Microsoft.Extensions.DependencyInjection;
+using eAgenda.Dominio.Compartilhado;
 
-namespace eAgenda.Infraestrutura.Arquivos;
+namespace eAgenda.Infraestrutura.Arquivos.Compartilhado;
 
-public static class DependencyInjection
+public abstract class RepositorioBaseEmArquivo<T> where T : EntidadeBase<T>
 {
-    public static IServiceCollection AddCamadaInfraestruturaEmArquivo(this IServiceCollection services)
+    protected ContextoDados contexto;
+    protected List<T> registros = new List<T>();
+
+    protected RepositorioBaseEmArquivo(ContextoDados contexto)
     {
-        services.AddScoped(_ => new ContextoDados(true));
+        this.contexto = contexto;
 
-        services.AddScoped<IRepositorioContato, RepositorioContatoEmArquivo>();
-        services.AddScoped<IRepositorioCompromisso, RepositorioCompromissoEmArquivo>();
-        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
-        services.AddScoped<IRepositorioDespesa, RepositorioDespesaEmArquivo>();
-        services.AddScoped<IRepositorioTarefa, RepositorioTarefaEmArquivo>();
+        registros = ObterRegistros();
+    }
 
-        return services;
+    protected abstract List<T> ObterRegistros();
+
+    public void CadastrarRegistro(T novoRegistro)
+    {
+        registros.Add(novoRegistro);
+
+        contexto.Salvar();
+    }
+
+    public bool EditarRegistro(Guid idRegistro, T registroEditado)
+    {
+        T? registroSelecionado = SelecionarRegistroPorId(idRegistro);
+
+        if (registroSelecionado is null)
+            return false;
+
+        registroSelecionado.AtualizarRegistro(registroEditado);
+
+        contexto.Salvar();
+
+        return true;
+    }
+
+    public bool ExcluirRegistro(Guid idRegistro)
+    {
+        T? registroSelecionado = SelecionarRegistroPorId(idRegistro);
+
+        if (registroSelecionado is null)
+            return false;
+
+        registros.Remove(registroSelecionado);
+
+        contexto.Salvar();
+
+        return true;
+    }
+
+    public List<T> SelecionarRegistros()
+    {
+        return registros;
+    }
+
+    public T? SelecionarRegistroPorId(Guid idRegistro)
+    {
+        return registros.Find((x) => x.Id.Equals(idRegistro));
     }
 }
