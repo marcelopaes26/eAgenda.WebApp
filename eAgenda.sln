@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Dominio", "eAgenda.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Infraestrutura.Orm", "eAgenda.Infraestrutura.Orm\eAgenda.Infraestrutura.Orm.csproj", "{9D6C0B35-7278-4858-A62A-183A597E482F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Testes", "4. Testes", "{08F76BF5-2594-222D-9497-A99571B9FE2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Testes.Integracao", "eAgenda.Testes.Integracao\eAgenda.Testes.Integracao.csproj", "{C2B18258-40F9-4730-B188-6602F83E38A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{9D6C0B35-7278-4858-A62A-183A597E482F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D6C0B35-7278-4858-A62A-183A597E482F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D6C0B35-7278-4858-A62A-183A597E482F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2B18258-40F9-4730-B188-6602F83E38A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2B18258-40F9-4730-B188-6602F83E38A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2B18258-40F9-4730-B188-6602F83E38A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2B18258-40F9-4730-B188-6602F83E38A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +56,6 @@ Global
 		{5FE99666-30CF-492C-8B4D-2CD7C7A9A473} = {902C5020-ED5E-36B7-676D-3CA3BD53E0D0}
 		{884CFD9B-C21B-480C-A621-C54EDFA844A2} = {FFA71E88-89B1-1937-D83D-0FD0D35D6019}
 		{9D6C0B35-7278-4858-A62A-183A597E482F} = {902C5020-ED5E-36B7-676D-3CA3BD53E0D0}
+		{C2B18258-40F9-4730-B188-6602F83E38A2} = {08F76BF5-2594-222D-9497-A99571B9FE2C}
 	EndGlobalSection
 EndGlobal
